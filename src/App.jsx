@@ -1,6 +1,13 @@
         import { useState } from "react";
         import Item from "./Item";
 
+  
+        function List(props){
+         return <ul style={{ listStyle:"none", padding: 21, background: "#999" }}>
+                       {props.children}
+                </ul>
+        }
+
 
 export default function App() {
   const [data, setData] = useState([
@@ -22,7 +29,7 @@ export default function App() {
             <h1> React WEB... ... ... </h1>
                 <button onClick= {add} >+</button>
                 <button> Lists - { data.length } </button>
-            <ul>
+            <List>
                { data.map(data => {
                     return <Item 
                       key = {data.id}
@@ -30,6 +37,6 @@ export default function App() {
                       remove = { remove }
                      />
                })}
-            </ul>
+            </List>
           </>
 }
