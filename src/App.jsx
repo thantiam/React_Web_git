@@ -1,4 +1,4 @@
-        import { useState } from "react";
+        import { useState, useRef } from "react";
         import Item from "./Item";
 
   
@@ -10,6 +10,7 @@
 
 
 export default function App() {
+    const inputRef = useRef();
   const [data, setData] = useState([
       {id:3,name: "Three", done: "true"},
       {id:2,name: "Two", done: "false"},
@@ -33,7 +34,7 @@ export default function App() {
                 <br />
 
                 <form>
-                  <input type="text" />
+                  <input type="text" ref={inputRef} />
                   <button type="submit">Add</button>
                 </form>
 
