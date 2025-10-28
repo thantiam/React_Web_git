@@ -1,14 +1,6 @@
         import { useState } from "react";
+        import { Item } from "./Item";
 
-        function Item({data, remove }) {
-
-            //  const del = () => { remove(data.id) };
-
-          return <li> 
-            {data.name}
-              <button onClick={ () => remove(data.id)} > &times; </button> 
-            </li>
-        }
 
 export default function App() {
   const [data, setData] = useState([
