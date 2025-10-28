@@ -29,6 +29,14 @@ export default function App() {
             <h1> React WEB... ... ... </h1>
                 <button onClick= {add} >+</button>
                 <button> Lists - { data.length } </button>
+                <br />
+                <br />
+
+                <form>
+                  <input type="text" />
+                  <button type="submit">Add</button>
+                </form>
+
             <List>
                { data.map(data => {
                     return <Item 
