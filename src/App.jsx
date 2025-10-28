@@ -10,16 +10,22 @@
 
 
 export default function App() {
+
     const inputRef = useRef();
+
   const [data, setData] = useState([
       {id:3,name: "Three", done: "true"},
       {id:2,name: "Two", done: "false"},
       {id:1,name: "One", done: "false"},
   ]);
 
-     function add(name) {
+     function add() {
              const id = data[0].id + 1;
-          setData([{id, name: "Ninety Sixty-nine", done: "false"},...data]);
+
+             const name = inputRef.current.value;
+               if (name == "") return false;
+
+          setData([{id, name, done: "false"},...data]);
      }
 
      const remove = id => {
@@ -33,7 +39,12 @@ export default function App() {
                 <br />
                 <br />
 
-                <form>
+                <form onSubmit={ e => {
+                    e.preventDefault();
+                    add();
+                    e.currentTarget.reset();
+                } } >
+
                   <input type="text" ref={inputRef} />
                   <button type="submit">Add</button>
                 </form>
