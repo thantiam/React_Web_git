@@ -2,9 +2,9 @@
         import Item from "./Item";
 
   
-        function List(props){
+        function List({children}){
          return <ul style={{ listStyle:"none", padding: 21, background: "#999" }}>
-                       {props.children}
+                       {children}
                 </ul>
         }
 
