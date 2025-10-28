@@ -11,7 +11,7 @@ export default function App() {
 
      function add(name) {
              const id = data[0].id + 1;
-          setData([{id, name: "Ninety Sixty-nkfine", done: "false"},...data]);
+          setData([{id, name: "Ninety Sixty-nine", done: "false"},...data]);
      }
 
      const remove = id => {
