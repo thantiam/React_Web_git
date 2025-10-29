@@ -3,7 +3,7 @@
 
   
         function List({children}){
-         return <ul style={{ listStyle:"none", padding: 21, background: "#999" }}>
+         return <ul style={{ listStyle:"none", padding: 21, background: "#608000", color:"#fff", }}>
                        {children}
                 </ul>
         }
@@ -34,19 +34,19 @@ export default function App() {
 
   return  <>
             <h1> React WEB... ... ... </h1>
-                <button onClick= {add} >+</button>
+                {/* <button onClick= {add} >+</button> */}
                 <button> Lists - { data.length } </button>
                 <br />
                 <br />
 
-                <form onSubmit={ e => {
+                <form style={{ display:"flex", justifyContent:"center", }} onSubmit={ e => {
                     e.preventDefault();
                     add();
                     e.currentTarget.reset();
                 } } >
 
                   <input type="text" ref={inputRef} />
-                  <button type="submit">Add</button>
+                  <button style={{ marginLeft:6, color:"#fff", background:"#608000", border:"none", }} type="submit">Add</button>
                 </form>
 
             <List>
