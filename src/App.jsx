@@ -14,18 +14,27 @@ export default function App() {
     const inputRef = useRef();
 
   const [data, setData] = useState([
-      {id:3,name: "Three", done: "true"},
-      {id:2,name: "Two", done: "false"},
-      {id:1,name: "One", done: "false"},
+      // {id:3,name: "Three", done: true},
+      // {id:2,name: "Two", done: false},
+      // {id:1,name: "One", done: false},
   ]);
 
      function add() {
-             const id = data[0].id + 1;
+             const id = data.length ? data[0].id + 1 : 1;
 
              const name = inputRef.current.value;
                if (name == "") return false;
 
-          setData([{id, name, done: "false"},...data]);
+          setData([{id, name, done: false},...data]);
+     }
+
+     const toggle = id => {
+          setData(
+            data.map(data => {
+             if (data.id == id ) data.done = !data.done;
+            return data;
+          })
+        ); 
      }
 
      const remove = id => {
@@ -35,7 +44,7 @@ export default function App() {
   return  <>
             <h1> React WEB... ... ... </h1>
                 {/* <button onClick= {add} >+</button> */}
-                <button> Lists - { data.length } </button>
+                {/* <button> Lists - { data.filter(data => !data.done).length } </button> */}
                 <br />
                 <br />
 
@@ -48,15 +57,31 @@ export default function App() {
                   <input type="text" ref={inputRef} />
                   <button style={{ marginLeft:6, color:"#fff", background:"#608000", border:"none", }} type="submit">Add</button>
                 </form>
-
+             <h3>To Do Lists - { data.filter(data => !data.done).length }</h3>
             <List>
-               { data.map(data => {
+               { data.filter(data => !data.done).map(data => {
                     return <Item 
                       key = {data.id}
                       data = {data}
                       remove = { remove }
-                     />
-               })}
+                      toggle = {toggle}
+                      />
+                    })}
+            </List>
+                <br />
+                <hr />
+                <br />
+                
+                <h3>Done - { data.filter(data => data.done).length }</h3>
+                <List>
+               { data.filter(data => data.done).map(data => {
+                    return <Item 
+                      key = {data.id}
+                      data = {data}
+                      remove = { remove }
+                      toggle = {toggle}
+                      />
+                    })}
             </List>
           </>
 }
