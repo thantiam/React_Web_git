@@ -2,8 +2,14 @@
         import Item from "./Item";
 
   
-        function List({children}){
-         return <ul style={{ listStyle:"none", padding: 21, background: "#608000", color:"#fff", }}>
+        function List({children,data}){
+           const style = { 
+             listStyle:"none", padding: 21, 
+             background: "#608000",
+             color:"#fff", 
+           };
+
+         return <ul style={style}>
                        {children}
                 </ul>
         }
@@ -54,10 +60,12 @@ export default function App() {
                     e.currentTarget.reset();
                 } } >
 
-                  <input type="text" ref={inputRef} />
+                  <input placeholder="To Do List..." type="text" ref={inputRef} />
                   <button style={{ marginLeft:6, color:"#fff", background:"#608000", border:"none", }} type="submit">Add</button>
                 </form>
+                <br /><br />
              <h3>To Do Lists - { data.filter(data => !data.done).length }</h3>
+
             <List>
                { data.filter(data => !data.done).map(data => {
                     return <Item 
@@ -73,6 +81,7 @@ export default function App() {
                 <br />
                 
                 <h3>Done - { data.filter(data => data.done).length }</h3>
+                <br />
                 <List>
                { data.filter(data => data.done).map(data => {
                     return <Item 
