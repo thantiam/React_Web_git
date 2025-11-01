@@ -21,9 +21,9 @@ export default function Item({data, toggle, remove }) {
               } */}
 
                  <IconButton onClick={ () => toggle(data.id)} >
-                          {  !data.done ? 
-                                         <CheckIcon sx={{ color: "#608000" }} /> 
-                                       : <UndoneIcon sx={{ color:"orange" }}/> 
+                          {  data.done ? 
+                                         <UndoneIcon sx={{ color:"orange" }}/> 
+                                       : <CheckIcon sx={{ color: "#608000" }} /> 
                              }
                  </IconButton>
 
