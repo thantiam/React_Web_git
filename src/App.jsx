@@ -1,5 +1,7 @@
         import { useState, useRef } from "react";
         import Item from "./Item";
+        import Header from "./Header";
+        import { Typography, Container, } from "@mui/material";
 
   
         function List({children,data}){
@@ -7,6 +9,7 @@
              listStyle:"none", padding: 21, 
              background: "#608000",
              color:"#fff", 
+             borderRadius: 6,
            };
 
          return <ul style={style}>
@@ -48,13 +51,15 @@ export default function App() {
       }
 
   return  <>
-            <h1> React WEB... ... ... </h1>
-                {/* <button onClick= {add} >+</button> */}
-                {/* <button> Lists - { data.filter(data => !data.done).length } </button> */}
+            <Header /> 
+            {/* <h1> React WEB... ... ... </h1>
+                <button onClick= {add} >+</button>
+                <button> Lists - { data.filter(data => !data.done).length } </button>
                 <br />
-                <br />
+                <br /> */}
 
-                <form style={{ display:"flex", justifyContent:"center", }} onSubmit={ e => {
+               <Container maxWidth = "sm" sx = {{ mt: 4, }} >
+                 <form onSubmit={ e => {
                     e.preventDefault();
                     add();
                     e.currentTarget.reset();
@@ -64,7 +69,7 @@ export default function App() {
                   <button style={{ marginLeft:6, color:"#fff", background:"#608000", border:"none", }} type="submit">Add</button>
                 </form>
                 <br /><br />
-             <h3>To Do Lists - { data.filter(data => !data.done).length }</h3>
+             <Typography color="#608000" fontWeight={600} >Lists - { data.filter(data => !data.done).length }</Typography>
 
             <List>
                { data.filter(data => !data.done).map(data => {
@@ -80,7 +85,7 @@ export default function App() {
                 <hr />
                 <br />
                 
-                <h3>Done - { data.filter(data => data.done).length }</h3>
+                <Typography color="#608000" fontWeight={600}>Done - { data.filter(data => data.done).length }</Typography>
                 <br />
                 <List>
                { data.filter(data => data.done).map(data => {
@@ -92,5 +97,6 @@ export default function App() {
                       />
                     })}
             </List>
+               </Container>
           </>
 }
