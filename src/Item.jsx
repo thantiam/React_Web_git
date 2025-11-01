@@ -2,7 +2,7 @@ import { ListItem, ListItemText, IconButton } from "@mui/material";
 import { 
   Delete as DeleteIcon,
   Check as CheckIcon, 
-  Replay,
+  Replay as UndoneIcon,
 } from "@mui/icons-material";
 
 
@@ -11,7 +11,7 @@ export default function Item({data, toggle, remove }) {
               {data.done ? 
                       // ( <button style={{ marginRight:12, }} onClick={ () => toggle(data.id)} > Undo </button> )
                       <IconButton onClick={ () => toggle(data.id)} >
-                          <Replay sx={{ color:"orange" }}/>
+                          <UndoneIcon sx={{ color:"orange" }}/>
                       </IconButton>
                       :
                       // ( <button style={{ marginRight:12, }} onClick={ () => toggle(data.id)} > Check </button> )
