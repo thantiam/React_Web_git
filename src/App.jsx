@@ -1,21 +1,21 @@
         import { useState, useRef } from "react";
         import Item from "./Item";
         import Header from "./Header";
-        import { Typography, Container, } from "@mui/material";
+        import { Typography, Container, List, Divider } from "@mui/material";
 
   
-        function List({children,data}){
-           const style = { 
-             listStyle:"none", padding: 21, 
-             background: "#608000",
-             color:"#fff", 
-             borderRadius: 6,
-           };
+        // function List({children,data}){
+        //    const style = { 
+        //      listStyle:"none", padding: 21, 
+        //      background: "#608000",
+        //      color:"#fff", 
+        //      borderRadius: 6,
+        //    };
 
-         return <ul style={style}>
-                       {children}
-                </ul>
-        }
+        //  return <ul style={style}>
+        //                {children}
+        //         </ul>
+        // }
 
 
 export default function App() {
@@ -58,7 +58,7 @@ export default function App() {
                 <br />
                 <br /> */}
 
-               <Container maxWidth = "sm" sx = {{ mt: 4, }} >
+               <Container maxWidth = "sm" sx = {{ my: 4, }} >
                  <form onSubmit={ e => {
                     e.preventDefault();
                     add();
@@ -71,7 +71,7 @@ export default function App() {
                 <br /><br />
              <Typography color="#608000" fontWeight={600} >Lists - { data.filter(data => !data.done).length }</Typography>
 
-            <List>
+            <List sx={{ color: "#000", borderRadius: 3, }} >
                { data.filter(data => !data.done).map(data => {
                     return <Item 
                       key = {data.id}
@@ -82,12 +82,12 @@ export default function App() {
                     })}
             </List>
                 <br />
-                <hr />
+                <Divider />
                 <br />
                 
                 <Typography color="#608000" fontWeight={600}>Done - { data.filter(data => data.done).length }</Typography>
                 <br />
-                <List>
+                <List sx={{ color: "#000", borderRadius: 3, }} >
                { data.filter(data => data.done).map(data => {
                     return <Item 
                       key = {data.id}
