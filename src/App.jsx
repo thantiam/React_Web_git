@@ -1,6 +1,7 @@
-        import { useState, useRef } from "react";
+        import { useState } from "react";
         import Item from "./Item";
         import Header from "./Header";
+        import Form from "./Form";
         import { Typography, Container, List, Divider } from "@mui/material";
 
   
@@ -20,7 +21,7 @@
 
 export default function App() {
 
-    const inputRef = useRef();
+    // const inputRef = useRef();
 
   const [data, setData] = useState([
       // {id:3,name: "Three", done: true},
@@ -28,10 +29,10 @@ export default function App() {
       // {id:1,name: "One", done: false},
   ]);
 
-     function add() {
+     function add(name) {
              const id = data.length ? data[0].id + 1 : 1;
 
-             const name = inputRef.current.value;
+            //  const name = inputRef.current.value;
                if (name == "") return false;
 
           setData([{id, name, done: false},...data]);
@@ -59,7 +60,8 @@ export default function App() {
                 <br /> */}
 
                <Container maxWidth = "sm" sx = {{ my: 4, }} >
-                 <form onSubmit={ e => {
+
+                 {/* <form onSubmit={ e => {
                     e.preventDefault();
                     add();
                     e.currentTarget.reset();
@@ -67,7 +69,10 @@ export default function App() {
 
                   <input placeholder="To Do List..." type="text" ref={inputRef} />
                   <button style={{ marginLeft:6, color:"#fff", background:"#608000", border:"none", }} type="submit">Add</button>
-                </form>
+                </form> */}
+
+                <Form add = {add} />
+
                 <br /><br />
              <Typography color="#608000" fontWeight={600} >Lists - { data.filter(data => !data.done).length }</Typography>
 
