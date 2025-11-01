@@ -8,17 +8,24 @@ import {
 
 export default function Item({data, toggle, remove }) {
           return <ListItem> 
-              {data.done ? 
-                      // ( <button style={{ marginRight:12, }} onClick={ () => toggle(data.id)} > Undo </button> )
+              {/* {data.done ? 
+                      ( <button style={{ marginRight:12, }} onClick={ () => toggle(data.id)} > Undo </button> )
                       <IconButton onClick={ () => toggle(data.id)} >
                           <UndoneIcon sx={{ color:"orange" }}/>
                       </IconButton>
                       :
-                      // ( <button style={{ marginRight:12, }} onClick={ () => toggle(data.id)} > Check </button> )
+                      ( <button style={{ marginRight:12, }} onClick={ () => toggle(data.id)} > Check </button> )
                       <IconButton onClick={ () => toggle(data.id)} >
                           <CheckIcon sx={{ color: "#608000" }} />
                       </IconButton>
-              }
+              } */}
+
+                 <IconButton onClick={ () => toggle(data.id)} >
+                          {  !data.done ? 
+                                         <CheckIcon sx={{ color: "#608000" }} /> 
+                                       : <UndoneIcon sx={{ color:"orange" }}/> 
+                             }
+                 </IconButton>
 
                  <ListItemText primary = {data.name} />
 
