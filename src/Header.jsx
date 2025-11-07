@@ -1,15 +1,33 @@
-import { AppBar, Toolbar, Typography, Badge } from "@mui/material";
+import { AppBar, Toolbar, Typography, Badge, IconButton } from "@mui/material";
+import {
+   LightMode as LightModeIcon,
+   DarkMode as DarkModeIcon,
+} from "@mui/icons-material"
+
+import { useApp } from "./AppProvider";
 
 
 
+export default function Header({count}) { 
 
+           const {mode, setMode} = useApp();
 
-export default function Header({count}) {
     return <AppBar position="static" sx={{ bgcolor: "#608000" }}>
-             <Toolbar>
+             <Toolbar sx={{ display:"flex", justifyContent:"space-between" }}>
                 <Badge badgeContent = {count} color="error">
                  <Typography fontSize={25}>Todo Lists...</Typography>
                 </Badge>
+
+                { mode == "dark" ?
+                         <IconButton  color="inherit"  onClick={() => setMode("light")} >
+                             <LightModeIcon />
+                         </IconButton>  :
+
+                         <IconButton  color="inherit"  onClick={() => setMode("dark")}>
+                            <DarkModeIcon />
+                         </IconButton>
+                }
+
              </Toolbar>
            </AppBar>
 }
