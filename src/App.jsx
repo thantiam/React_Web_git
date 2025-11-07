@@ -52,7 +52,7 @@ export default function App() {
       }
 
   return  <>
-            <Header /> 
+            <Header count={data.filter(data => !data.done).length} /> 
             {/* <h1> React WEB... ... ... </h1>
                 <button onClick= {add} >+</button>
                 <button> Lists - { data.filter(data => !data.done).length } </button>

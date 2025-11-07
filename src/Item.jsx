@@ -27,7 +27,7 @@ export default function Item({data, toggle, remove }) {
                              }
                  </IconButton>
 
-                 <ListItemText primary = {data.name} />
+                 <ListItemText secondary = {data.name} />
 
 
 
