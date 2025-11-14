@@ -25,6 +25,7 @@ export default function App() {
     // const inputRef = useRef();
 
  const [isLoading, setIsLoading] = useState(false);
+ const [error, setError] = useState();
 
   const [data, setData] = useState([
       // {id:3,name: "Three", done: true},
@@ -41,6 +42,10 @@ export default function App() {
                setData(items);
 
                setIsLoading(false);
+              })
+              .catch( () => {
+                setError("Unable to connect server!");
+                setIsLoading(false);
               });
         }, []);
 
@@ -105,6 +110,7 @@ export default function App() {
                 <Form add = {add} />
 
                 { isLoading && <Alert severity="warning" sx={{ mt:3 }} > Loading... ... ... </Alert> }
+                { error && <Alert severity="error" sx={{ mt:3 }} > {error} </Alert> }
 
                 <br /><br />
              <Typography color="#608000" fontWeight={600} >Lists - { data.filter(data => !data.done).length }</Typography>
