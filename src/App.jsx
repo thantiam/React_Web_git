@@ -1,8 +1,11 @@
-        import { useState, useEffect } from "react";
+        // import { useState, useEffect } from "react";
         import Item from "./Item";
         import Header from "./Header";
         import Form from "./Form";
         import { Typography, Container, List, Divider, Alert } from "@mui/material";
+
+        import { useQuery } from "@tanstack/react-query";
+        import { queryClient } from "./AppProvider";
 
   
         // function List({children,data}){
@@ -20,34 +23,38 @@
 
         const api = "http://localhost:8800/items";
 
+        async function fetchItems() {
+          const res = await fetch(api);
+          return res.json();
+        }
+
 export default function App() {
 
     // const inputRef = useRef();
 
- const [isLoading, setIsLoading] = useState(false);
- const [error, setError] = useState();
-
-  const [data, setData] = useState([
-      // {id:3,name: "Three", done: true},
-      // {id:2,name: "Two", done: false},
-      // {id:1,name: "One", done: false},
-  ]);
+//  const [isLoading, setIsLoading] = useState(false);
+//  const [error, setError] = useState();
+//  const [data, setData] = useState([
+//       // {id:3,name: "Three", done: true},
+//       // {id:2,name: "Two", done: false},
+//       // {id:1,name: "One", done: false},
+//   ]);
      
-        useEffect( () => {
-          setIsLoading(true);
+        // useEffect( () => {
+        //   setIsLoading(true);
           
-             fetch(api)
-             .then(res => res.json())
-             .then(items => { 
-               setData(items);
+        //      fetch(api)
+        //      .then(res => res.json())
+        //      .then(items => { 
+        //        setData(items);
 
-               setIsLoading(false);
-              })
-              .catch( () => {
-                setError("Unable to connect server!");
-                setIsLoading(false);
-              });
-        }, []);
+        //        setIsLoading(false);
+        //       })
+        //       .catch( () => {
+        //         setError("Unable to connect server!");
+        //         setIsLoading(false);
+        //       });
+        // }, []);
 
         // useEffect(() => {
         //   (async () => {
@@ -74,37 +81,62 @@ export default function App() {
     //       setData([{id, name, done: false},...data]);
     //  }
 
+                  const {data, isLoading, error} = useQuery({
+                    queryKey: ['items'],
+                    queryFn: fetchItems,
+                  });
+
                     //api add for real
                     const add = async name => {
-                      const res = await fetch(api, {
+                       await fetch(api, {
                          method: "POST",
                          body: JSON.stringify( { name } ),
                          headers: {
                           'Content-Type': 'application/json',
                          } 
                         });
-                      const item = await res.json();
-                      setData([...data, item]);
+
+                      // const item = await res.json();
+                      // setData([...data, item]);
+
+                      queryClient.invalidateQueries(['items']);
                     }
 
-     const toggle = id => {
-              fetch(`${api}/${id}/toggle`, { method: "PUT" });
-          setData(
-            data.map(data => {
-             if (data.id == id ) data.done = !data.done;
-            return data;
-          })
-        ); 
+     const toggle = async id => {
+             await fetch(`${api}/${id}/toggle`, { method: "PUT" });
+             queryClient.invalidateQueries(['items']);
+
+        //   setData(
+        //     data.map(data => {
+        //      if (data.id == id ) data.done = !data.done;
+        //     return data;
+        //   })
+        // ); 
+
      }
 
     //  const remove = id => {
     //     setData(data.filter( data => data.id != id ));
     //   }
                   //api remove for real
-                  const remove = id => {
-                    fetch(`${api}/${id}`, { method: "DELETE" });
+                  const remove = async id => {
+                    await fetch(`${api}/${id}`, { method: "DELETE" });
+                    queryClient.invalidateQueries(['items']);
 
-                    setData(data.filter( data => data.id != id ));
+                    // setData(data.filter( data => data.id != id ));
+                  }
+
+
+                  if(isLoading) {
+                    return <Alert severity="warning" sx={{ mt:2 }} > 
+                             Loading... ... ... 
+                           </Alert>;
+                  }
+
+                  if(error) {
+                    return <Alert severity="error" sx={{ mt:2 }} >
+                                {error}
+                           </Alert> 
                   }
 
   return  <>
@@ -129,8 +161,8 @@ export default function App() {
 
                 <Form add = {add} />
 
-                { isLoading && <Alert severity="warning" sx={{ mt:3 }} > Loading... ... ... </Alert> }
-                { error && <Alert severity="error" sx={{ mt:3 }} > {error} </Alert> }
+                {/* { isLoading && <Alert severity="warning" sx={{ mt:3 }} > Loading... ... ... </Alert> }
+                { error && <Alert severity="error" sx={{ mt:3 }} > {error} </Alert> } */}
 
                 <br /><br />
              <Typography color="#608000" fontWeight={600} >Lists - { data.filter(data => !data.done).length }</Typography>
