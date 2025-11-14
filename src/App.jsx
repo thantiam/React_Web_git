@@ -30,18 +30,26 @@ export default function App() {
       // {id:1,name: "One", done: false},
   ]);
      
-        useEffect( () => {
-             fetch(api)
-             .then(res => res.json())
-             .then(items => setData(items));
-        }, []);
+        // useEffect( () => {
+        //      fetch(api)
+        //      .then(res => res.json())
+        //      .then(items => setData(items));
+        // }, []);
+
+        // useEffect(() => {
+        //   (async () => {
+        //     const res = await fetch(api);
+        //     const items = await res.json();
+        //     setData(items);
+        //   })();
+        // }, []);
 
         useEffect(() => {
-          (async () => {
-            const res = await fetch(api);
+          fetch(api)
+          .then(async res => {
             const items = await res.json();
             setData(items);
-          })();
+          })
         }, []);
      
      function add(name) {
