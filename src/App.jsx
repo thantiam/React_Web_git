@@ -2,7 +2,7 @@
         import Item from "./Item";
         import Header from "./Header";
         import Form from "./Form";
-        import { Typography, Container, List, Divider } from "@mui/material";
+        import { Typography, Container, List, Divider, colors } from "@mui/material";
 
   
         // function List({children,data}){
@@ -39,7 +39,7 @@ export default function App() {
              .then(res => res.json())
              .then(items => { 
                setData(items);
-               
+
                setIsLoading(false);
               });
         }, []);
@@ -103,6 +103,8 @@ export default function App() {
                 </form> */}
 
                 <Form add = {add} />
+
+                { isLoading && <div style={{ marginTop:12, color:"#ff5e00f7" }} > Loading... ... ... </div> }
 
                 <br /><br />
              <Typography color="#608000" fontWeight={600} >Lists - { data.filter(data => !data.done).length }</Typography>
