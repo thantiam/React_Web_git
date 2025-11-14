@@ -24,17 +24,25 @@ export default function App() {
 
     // const inputRef = useRef();
 
+ const [isLoading, setIsLoading] = useState(false);
+
   const [data, setData] = useState([
       // {id:3,name: "Three", done: true},
       // {id:2,name: "Two", done: false},
       // {id:1,name: "One", done: false},
   ]);
      
-        // useEffect( () => {
-        //      fetch(api)
-        //      .then(res => res.json())
-        //      .then(items => setData(items));
-        // }, []);
+        useEffect( () => {
+          setIsLoading(true);
+          
+             fetch(api)
+             .then(res => res.json())
+             .then(items => { 
+               setData(items);
+               
+               setIsLoading(false);
+              });
+        }, []);
 
         // useEffect(() => {
         //   (async () => {
@@ -44,13 +52,13 @@ export default function App() {
         //   })();
         // }, []);
 
-        useEffect(() => {
-          fetch(api)
-          .then(async res => {
-            const items = await res.json();
-            setData(items);
-          })
-        }, []);
+        // useEffect(() => {
+        //   fetch(api)
+        //   .then(async res => {
+        //     const items = await res.json();
+        //     setData(items);
+        //   })
+        // }, []);
      
      function add(name) {
              const id = data.length ? data[0].id + 1 : 1;
