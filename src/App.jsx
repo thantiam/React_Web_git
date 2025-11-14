@@ -65,14 +65,27 @@ export default function App() {
         //   })
         // }, []);
      
-     function add(name) {
-             const id = data.length ? data[0].id + 1 : 1;
+    //  function add(name) {
+    //          const id = data.length ? data[0].id + 1 : 1;
 
-            //  const name = inputRef.current.value;
-               if (name == "") return false;
+    //         //  const name = inputRef.current.value;
+    //            if (name == "") return false;
 
-          setData([{id, name, done: false},...data]);
-     }
+    //       setData([{id, name, done: false},...data]);
+    //  }
+
+                    //api add for real
+                    const add = async name => {
+                      const res = await fetch(api, {
+                         method: "POST",
+                         body: JSON.stringify( { name } ),
+                         headers: {
+                          'Content-Type': 'application/json',
+                         } 
+                        });
+                      const item = await res.json();
+                      setData([...data, item]);
+                    }
 
      const toggle = id => {
           setData(
