@@ -1,4 +1,4 @@
-        import { useState } from "react";
+        import { useState, useEffect } from "react";
         import Item from "./Item";
         import Header from "./Header";
         import Form from "./Form";
@@ -18,6 +18,7 @@
         //         </ul>
         // }
 
+        const api = "http://localhost:8800/items";
 
 export default function App() {
 
@@ -28,7 +29,11 @@ export default function App() {
       // {id:2,name: "Two", done: false},
       // {id:1,name: "One", done: false},
   ]);
-
+     
+        useEffect( () => {
+             fetch(api);
+        }, []);
+     
      function add(name) {
              const id = data.length ? data[0].id + 1 : 1;
 
