@@ -96,9 +96,15 @@ export default function App() {
         ); 
      }
 
-     const remove = id => {
-        setData(data.filter( data => data.id != id ));
-      }
+    //  const remove = id => {
+    //     setData(data.filter( data => data.id != id ));
+    //   }
+                  //api remove for real
+                  const remove = id => {
+                    fetch(`${api}/${id}`, { method: "DELETE" });
+
+                    setData(data.filter( data => data.id != id ));
+                  }
 
   return  <>
             <Header count={data.filter(data => !data.done).length} /> 
