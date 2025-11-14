@@ -88,6 +88,7 @@ export default function App() {
                     }
 
      const toggle = id => {
+              fetch(`${api}/${id}/toggle`, { method: "PUT" });
           setData(
             data.map(data => {
              if (data.id == id ) data.done = !data.done;
