@@ -2,7 +2,7 @@
         import Item from "./Item";
         import Header from "./Header";
         import Form from "./Form";
-        import { Typography, Container, List, Divider, colors } from "@mui/material";
+        import { Typography, Container, List, Divider, Alert } from "@mui/material";
 
   
         // function List({children,data}){
@@ -104,7 +104,7 @@ export default function App() {
 
                 <Form add = {add} />
 
-                { isLoading && <div style={{ marginTop:12, color:"#ff5e00f7" }} > Loading... ... ... </div> }
+                { isLoading && <Alert severity="warning" sx={{ mt:3 }} > Loading... ... ... </Alert> }
 
                 <br /><br />
              <Typography color="#608000" fontWeight={600} >Lists - { data.filter(data => !data.done).length }</Typography>
